@@ -2,6 +2,8 @@
 import { prisma } from "@/lib/prisma";
 import { ContactSchema, RoomSchema } from "@/lib/zod";
 import { redirect } from "next/navigation";
+import { del } from "@vercel/blob";
+import { revalidatePath } from "next/cache";
 
 export const saveRoom = async (
   image: string,
@@ -73,4 +75,17 @@ export const ContactMessage = async (
   } catch (error) {
     console.log(error);
   }
+};
+
+// Delete Room
+export const deleteRoom = async (id: string, image: string) => {
+  try {
+    await del(image);
+    await prisma.room.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  revalidatePath("/admin/room");
 };
