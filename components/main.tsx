@@ -1,15 +1,18 @@
 import Card from "@/components/card";
+import { getRooms } from "@/lib/data";
 
-const Main = () => {
+const Main = async () => {
+  const rooms = await getRooms();
+  if (!rooms || rooms.length === 0) {
+    return <div>No rooms available.</div>;
+  }
+
   return (
     <div className="max-w-screen-xl py-6 pb-20 px-4 mx-auto">
       <div className="grid gap-7 md:grid-cols-3 ">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {rooms.map((room) => (
+          <Card key={room.id} room={room} />
+        ))}
       </div>
     </div>
   );
