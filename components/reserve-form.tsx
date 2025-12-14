@@ -59,7 +59,8 @@ const ReserveForm = ({
           />
           <div aria-live="polite" aria-atomic="true">
             <p className="text-sm text-red-500 mt-2">
-              {state?.error?.messageDate}
+              {(state as any)?.messageDate ??
+                (state?.error as any)?.messageDate}
             </p>
           </div>
         </div>

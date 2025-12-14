@@ -17,7 +17,7 @@ const Navlink = () => {
           <div className="hidden text-sm bg-gray-50 border rounded-full md:me-0 md:block focus:ring-4 focus:ring-gray-300">
             <Image
               className="size-8 rounded-full"
-              src={session.user.images || "/avatar.svg"}
+              src={session.user.image || "/avatar.svg"}
               width={34}
               height={34}
               alt="avatar"
